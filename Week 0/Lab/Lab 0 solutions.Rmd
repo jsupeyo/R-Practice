@@ -1,0 +1,151 @@
+---
+title: "Lab 0"
+author: "Ankur Garg, based on work by Haley Tiu, Rachel Hammond, and Nikhil Kalathil"
+date: "01/20/2024"
+output:
+  html_document: default
+  pdf_document: default
+---
+# Lab 0 - Hello R!
+
+Packages are pre-built suites of tools that allow us to use R in the way that we want. In this lab we will work with three packages: `datasauRus` which contains a dataset, `gapminder` -- a policy relevant dataset, and `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way.
+
+Install these packages by running the following in the console. (Note: you should already have the first three installed.)
+
+```{r eval = FALSE}
+install.packages("tidyverse")
+install.packages("gapminder")
+install.packages("ggplot2")
+install.packages("datasauRus")
+```
+
+Now we need to load the libraries
+
+```{r }
+library(tidyverse) 
+library(datasauRus)
+library(gapminder)
+library(ggplot2)
+```
+
+The data frame we will be working with today is called `datasaurus_dozen` and it's in the `datasauRus` package. Actually, this single data frame contains 13 datasets, designed to show us  why data visualization is important and how summary statistics alone can be misleading. The different datasets are marked by the `dataset` variable.
+
+To find out more about the dataset, type the following in your Console: `?datasaurus_dozen`. A question mark before the name of an object will always bring up its help file. This command must be ran in the Console.
+
+1. Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your R Markdown file. 
+
+ANSWER:
+
+# Data visualization and summary
+
+2. Plot `y` vs. `x` for the `dino` dataset. 
+Start with the `datasaurus_dozen` and pipe it into the `filter` function to filter for observations where `dataset == "dino"`. Store the resulting filtered data frame as a new data frame called `dino_data`.
+
+```{r}
+dino_data <- datasaurus_dozen %>%
+  filter(dataset == "dino")
+```
+
+There is a lot going on here, so let's slow down and unpack it a bit. 
+
+First, the pipe operator: `%>%`, takes what comes before it and sends it as the first argument to what comes after it. So here, we're saying `filter` the `datasaurus_dozen` data frame for observations where `dataset == "dino"`.
+
+Second, the assignment operator: `<-`, assigns the name `dino_data` to the filtered data frame.
+
+You should now see `dino_data` in your environment on the right. Click on it to look at the data.
+
+Next, we need to visualize these data. We will use the `ggplot` function for this. Its first argument is the data you're visualizing. Next we define the `aes`thetic mappings. In other words, the columns of the data that get mapped to certain aesthetic features of the plot, e.g. the `x` axis will represent the variable called `x` and the `y` axis will represent the variable called `y`. Then, we add another layer to this plot where we define which `geom`etric shapes we want to use to represent each observation in the data. In this case we want these to be points, hence `geom_point`.
+
+```{r}
+ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+```
+
+If this seems like a lot, it is. And you will learn about the philosophy of building data visualizations in layer in detail next week. For now, follow along with the code that is provided.
+
+2. Plot `y` vs. `x` for the `star` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. 
+
+```{r}
+### put your new star plot here
+star_data <- datasaurus_dozen %>%
+  filter(dataset == "star")
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+```
+
+
+3. Plot `y` vs. `x` for the `circle` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. 
+
+```{r}
+### put your new circle plot here
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle")
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+```
+
+4. Finally, let's plot all datasets at once. In order to do this we will make use of facetting.
+
+```{r}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+  geom_point()+
+  facet_wrap(~ dataset) +
+  theme(legend.position = "none")
+```
+
+# Gapminder and policy data 
+
+For the second part of this exercises, we will turn to the Gapminder dataset, which we will look at in more detail next week. The `gapminder` dataset is built into the `gapminder` package and has 6 variables with 1704 observations. To view the data, enter `view(gapmider)` in your console. 
+
+## Summary Statistics and Data Calls
+
+We can use `summary()` to get a simple summary of the variables in our dataset. 
+
+```{r}
+summary(gapminder)
+```
+
+There is also a package called `skimr` package that we can download for more robust summary statistics. Lets call it here. 
+
+```{r eval = FALSE}
+install.packages("skimr")
+```
+
+And after we install these packages, we can run: 
+
+```{r}
+library(skimr)
+
+gapminder %>% 
+  skim()
+```
+
+This is another example of how piping works. 
+
+We can also directly use R to call for specific statistics. Say that we want the mean of a specific variable (say, the mean of Life Expectancy), we can call the `mean()` function. There are a few different ways of referring to variables. We will be using piping once again. In this case: 
+
+```{r}
+gapminder %>% 
+  summarize(mean(lifeExp))
+```
+
+In this case, we pipe the `gapminder` dataset forward, and use `dplyr` to summarize the data, according to the mean. Take a look at the summarize function in help and look at some of the other options. 
+
+## Plotting
+
+We now use the same `ggplot2` package from earlier. As before, the `aes()` section of the code is very important. In this case, we are providing two "aesthetics" options: `x=continent` and `y = lifeExp`. This code produces two different plots. Based on just the code, can you guess which two? 
+
+```{r}
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_boxplot() +
+  geom_point()
+```
+
+How could we improve this plot?
+```{r}
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_boxplot() +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = .25)
+```
+
+Play around with this yourself. Can you make graphs using other variables? What other types of graphs are there? Feel free to check some out at: http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
