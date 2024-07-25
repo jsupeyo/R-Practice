@@ -1,0 +1,100 @@
+---
+title: "Gapminder"
+author: "Your Awesome Data Science Professor"
+format: html
+editor: visual
+---
+
+## Setup
+
+This code chunk sets up the analysis by loading the key libraries.
+
+```{r setup}
+library(tidyverse)
+library(gapminder)
+```
+
+## Look at the data
+
+Let's view the `gapminder` dataset. (This is interactive, so un-comment the `View` command.)
+
+```{r}
+View(gapminder)
+head(gapminder)
+```
+
+## Starter graph
+
+Let's start with a plot of GDP per capita vs. life expectancy in Asia in 2007. (This is based off the example in the slides.)
+
+```{r}
+gapminder |> 
+  filter(continent == "Asia", year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() + 
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy", 
+       title = "Life expectancy versus GDP in Asia in 2007") +
+  theme_bw()
+```
+
+## Your Turn 1a: GDP vs Life Expectancy in 1957 in Europe
+
+I've copy-and-pasted the above code here. Modify this code to instead plot GDP per capita versus life expectancy in 1957 in Europe.
+
+```{r}
+gapminder |> 
+  filter(continent == "Europe", year == 1957) |> 
+  ggplot(aes(x = gdpPercap, y = lifeExp))+
+  geom_point()+
+  scale_x_log10()+
+  labs( x = "GDP Per Capita", y = "Life Expectancy",
+        title = "Life Expectancy Versus GDP Per Capita in Europe in 1957")+
+  theme_bw()
+
+```
+
+## Your Turn 1b: GDP vs Life Expectancy in 1957 in the Americas
+
+I've again copy-and-pasted the above code here. Modify this code to instead plot GDP per capita versus life expectancy in 1957 in the Americas. (*Hint:* Look at the data to learn the right value for `continent`.)
+
+```{r}
+gapminder |> 
+  filter(continent == "Americas", year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() + 
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy", 
+       title = "Life expectancy versus GDP in Asia in 2007") +
+  theme_bw()
+```
+
+## Your Turn 2a: Life expectancy over time in the US
+
+I've again copy-and-pasted the above code here. Modify this code to plot life expectancy over time in the United States. *Hint 1:* Plot `year` on the x-axis and life expectancy (`lifeExp`) on the y-axis. *Hint 2:* What do you need to change under `filter`?
+
+```{r}
+gapminder |> 
+  filter(continent == "Asia", year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() + 
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy", 
+       title = "Life expectancy versus GDP in Asia in 2007") +
+  theme_bw()
+```
+
+## Your Turn 2b: Life expectancy over time in the US (cont'd)
+
+Wouldn't that plot look better as a line rather than points? Take a stab at converting the plot from points to a line by modifying `geom_point` .
+
+```{r}
+gapminder |> 
+  filter(continent == "Americas") |> 
+  ggplot(aes(x = year, y = lifeExp))+
+  geom_smooth()+
+  scale_x_log10()+
+  labs (x = "Year", "Life Expectancy",
+        title = "Life Expectancy Over Time in the US")+
+  theme_bw()
+```

@@ -1,0 +1,159 @@
+---
+title: "Gapminder"
+format: 
+  revealjs:
+    embed-resources: true
+editor: visual
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+# Packages
+library(tidyverse)
+```
+
+```{r load gapminder, include = FALSE}
+library(gapminder)
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "4,5"
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() +
+  labs(x = "GDP per capita", y = "Life expectancy", 
+       title = "Life expectancy versus GDP in 2007")
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "4"
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() +
+  scale_x_log10() + 
+  labs(x = "GDP per capita", y = "Life expectancy",
+       title = "Life expectancy versus GDP in 2007")
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "2"
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop)) +
+  geom_point() +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy",
+       title = "Life expectancy versus GDP in 2007")
+
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "3"
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop)) +
+  geom_point(alpha = 0.5) + 
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy",
+       title = "Life expectancy versus GDP in 2007")
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "7"
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop)) +
+  geom_point(alpha = 0.5) + 
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy",
+       title = "Life expectancy versus GDP in 2007") +
+  theme_bw()
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "8"
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop)) +
+  geom_point(alpha = 0.5) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy",
+       title = "Life expectancy versus GDP in 2007") +
+  theme_bw() + 
+  facet_wrap(~ continent)
+```
+
+## 
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "2"
+gapminder |> filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) +
+  geom_point(alpha = 0.5) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy",
+       title = "Life expectancy versus GDP in 2007") +
+  theme_bw() + 
+  facet_wrap(~ continent)
+```
+
+## 
+
+```{r, include = FALSE}
+library(gganimate)
+```
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+#| code-line-numbers: "6,9"
+gapminder |>
+   ggplot(aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) +
+   geom_point(alpha = 0.5) +
+   scale_x_log10() +
+   labs(x = "GDP per capita", y = "Life expectancy",
+        title = "Life expectancy versus GDP in {frame_time}") +
+   theme_bw() + 
+   facet_wrap(~ continent) + 
+   transition_time(year)
+```
