@@ -3,8 +3,8 @@ title: "Lab 0"
 author: "Ankur Garg, based on work by Haley Tiu, Rachel Hammond, and Nikhil Kalathil"
 date: "01/20/2024"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 # Lab 0 - Hello R!

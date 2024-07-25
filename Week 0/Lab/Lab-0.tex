@@ -1,0 +1,625 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Lab 0},
+  pdfauthor={Ankur Garg, based on work by Haley Tiu, Rachel Hammond, and Nikhil Kalathil},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lab 0}
+\author{Ankur Garg, based on work by Haley Tiu, Rachel Hammond, and
+Nikhil Kalathil}
+\date{01/20/2024}
+
+\begin{document}
+\maketitle
+
+\section{Lab 0 - Hello R!}\label{lab-0---hello-r}
+
+Packages are pre-built suites of tools that allow us to use R in the way
+that we want. In this lab we will work with three packages:
+\texttt{datasauRus} which contains a dataset, \texttt{gapminder} -- a
+policy relevant dataset, and \texttt{tidyverse} which is a collection of
+packages for doing data analysis in a ``tidy'' way.
+
+Install these packages by running the following in the console. (Note:
+you should already have the first three installed.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"gapminder"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"datasauRus"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we need to load the libraries
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(datasauRus)}
+\FunctionTok{library}\NormalTok{(gapminder)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+The data frame we will be working with today is called
+\texttt{datasaurus\_dozen} and it's in the \texttt{datasauRus} package.
+Actually, this single data frame contains 13 datasets, designed to show
+us why data visualization is important and how summary statistics alone
+can be misleading. The different datasets are marked by the
+\texttt{dataset} variable.
+
+To find out more about the dataset, type the following in your Console:
+\texttt{?datasaurus\_dozen}. A question mark before the name of an
+object will always bring up its help file. This command must be ran in
+the Console.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Based on the help file, how many rows and how many columns does the
+  \texttt{datasaurus\_dozen} file have? What are the variables included
+  in the data frame? Add your responses to your R Markdown file.
+\end{enumerate}
+
+ANSWER:
+
+\section{Data visualization and
+summary}\label{data-visualization-and-summary}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Plot \texttt{y} vs.~\texttt{x} for the \texttt{dino} dataset. Start
+  with the \texttt{datasaurus\_dozen} and pipe it into the
+  \texttt{filter} function to filter for observations where
+  \texttt{dataset\ ==\ "dino"}. Store the resulting filtered data frame
+  as a new data frame called \texttt{dino\_data}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datasaurus\_dozen }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(dataset }\SpecialCharTok{==} \StringTok{"dino"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ dino\_data}
+\NormalTok{dino\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 142 x 3
+##    dataset     x     y
+##    <chr>   <dbl> <dbl>
+##  1 dino     55.4  97.2
+##  2 dino     51.5  96.0
+##  3 dino     46.2  94.5
+##  4 dino     42.8  91.4
+##  5 dino     40.8  88.3
+##  6 dino     38.7  84.9
+##  7 dino     35.6  79.9
+##  8 dino     33.1  77.6
+##  9 dino     29.0  74.5
+## 10 dino     26.2  71.4
+## # i 132 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{view}\NormalTok{(dino\_data)}
+\FunctionTok{head}\NormalTok{(dino\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   dataset     x     y
+##   <chr>   <dbl> <dbl>
+## 1 dino     55.4  97.2
+## 2 dino     51.5  96.0
+## 3 dino     46.2  94.5
+## 4 dino     42.8  91.4
+## 5 dino     40.8  88.3
+## 6 dino     38.7  84.9
+\end{verbatim}
+
+There is a lot going on here, so let's slow down and unpack it a bit.
+
+First, the pipe operator: \texttt{\%\textgreater{}\%}, takes what comes
+before it and sends it as the first argument to what comes after it. So
+here, we're saying \texttt{filter} the \texttt{datasaurus\_dozen} data
+frame for observations where \texttt{dataset\ ==\ "dino"}.
+
+Second, the assignment operator: \texttt{\textless{}-}, assigns the name
+\texttt{dino\_data} to the filtered data frame.
+
+You should now see \texttt{dino\_data} in your environment on the right.
+Click on it to look at the data.
+
+Next, we need to visualize these data. We will use the \texttt{ggplot}
+function for this. Its first argument is the data you're visualizing.
+Next we define the \texttt{aes}thetic mappings. In other words, the
+columns of the data that get mapped to certain aesthetic features of the
+plot, e.g.~the \texttt{x} axis will represent the variable called
+\texttt{x} and the \texttt{y} axis will represent the variable called
+\texttt{y}. Then, we add another layer to this plot where we define
+which \texttt{geom}etric shapes we want to use to represent each
+observation in the data. In this case we want these to be points, hence
+\texttt{geom\_point}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dino\_data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x,}\AttributeTok{y =}\NormalTok{ y))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{colour =} \StringTok{"purple"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Dinodata"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab-0_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+If this seems like a lot, it is. And you will learn about the philosophy
+of building data visualizations in layer in detail next week. For now,
+follow along with the code that is provided.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Plot \texttt{y} vs.~\texttt{x} for the \texttt{star} dataset. You can
+  (and should) reuse code we introduced above, just replace the dataset
+  name with the desired dataset.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# put your new star plot here}
+\NormalTok{datasaurus\_dozen }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(dataset}\SpecialCharTok{==}\StringTok{"star"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{star\_data}
+\FunctionTok{head}\NormalTok{(star\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   dataset     x     y
+##   <chr>   <dbl> <dbl>
+## 1 star     58.2  91.9
+## 2 star     58.2  92.2
+## 3 star     58.7  90.3
+## 4 star     57.3  89.9
+## 5 star     58.1  92.0
+## 6 star     57.5  88.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{star\_data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x, }\AttributeTok{y=}\NormalTok{y))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{colour=}\StringTok{"purple"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Star Data"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab-0_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Plot \texttt{y} vs.~\texttt{x} for the \texttt{circle} dataset. You
+  can (and should) reuse code we introduced above, just replace the
+  dataset name with the desired dataset.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# put your new circle plot here}
+\NormalTok{datasaurus\_dozen }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(dataset }\SpecialCharTok{==}\StringTok{"circle"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ circle\_data}
+\FunctionTok{head}\NormalTok{(circle\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   dataset     x     y
+##   <chr>   <dbl> <dbl>
+## 1 circle   56.0  79.3
+## 2 circle   50.0  79.0
+## 3 circle   51.3  82.4
+## 4 circle   51.2  79.2
+## 5 circle   44.4  78.2
+## 6 circle   45.0  77.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{circle\_data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x, }\AttributeTok{y=}\NormalTok{y))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{colour=}\StringTok{"purple"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Circle Data"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab-0_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Finally, let's plot all datasets at once. In order to do this we will
+  make use of facetting.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datasaurus\_dozen }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }\AttributeTok{colour =}\NormalTok{ dataset))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ dataset)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Datasaurus Data"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab-0_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\section{Gapminder and policy data}\label{gapminder-and-policy-data}
+
+For the second part of this exercises, we will turn to the Gapminder
+dataset, which we will look at in more detail next week. The
+\texttt{gapminder} dataset is built into the \texttt{gapminder} package
+and has 6 variables with 1704 observations. To view the data, enter
+\texttt{view(gapmider)} in your console.
+
+\subsection{Summary Statistics and Data
+Calls}\label{summary-statistics-and-data-calls}
+
+We can use \texttt{summary()} to get a simple summary of the variables
+in our dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(gapminder)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         country        continent        year         lifeExp     
+##  Afghanistan:  12   Africa  :624   Min.   :1952   Min.   :23.60  
+##  Albania    :  12   Americas:300   1st Qu.:1966   1st Qu.:48.20  
+##  Algeria    :  12   Asia    :396   Median :1980   Median :60.71  
+##  Angola     :  12   Europe  :360   Mean   :1980   Mean   :59.47  
+##  Argentina  :  12   Oceania : 24   3rd Qu.:1993   3rd Qu.:70.85  
+##  Australia  :  12                  Max.   :2007   Max.   :82.60  
+##  (Other)    :1632                                                
+##       pop              gdpPercap       
+##  Min.   :6.001e+04   Min.   :   241.2  
+##  1st Qu.:2.794e+06   1st Qu.:  1202.1  
+##  Median :7.024e+06   Median :  3531.8  
+##  Mean   :2.960e+07   Mean   :  7215.3  
+##  3rd Qu.:1.959e+07   3rd Qu.:  9325.5  
+##  Max.   :1.319e+09   Max.   :113523.1  
+## 
+\end{verbatim}
+
+There is also a package called \texttt{skimr} package that we can
+download for more robust summary statistics. Lets call it here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"skimr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And after we install these packages, we can run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(skimr)}
+
+\NormalTok{gapminder }\SpecialCharTok{|\textgreater{}}  
+  \FunctionTok{skim}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Name & gapminder \\
+Number of rows & 1704 \\
+Number of columns & 6 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+factor & 2 \\
+numeric & 4 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\end{longtable}
+
+\textbf{Variable type: factor}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1489}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1064}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1489}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0851}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0957}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.4149}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+ordered
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_unique
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+top\_counts
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+country & 0 & 1 & FALSE & 142 & Afg: 12, Alb: 12, Alg: 12, Ang: 12 \\
+continent & 0 & 1 & FALSE & 5 & Afr: 624, Asi: 396, Eur: 360, Ame:
+300 \\
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1120}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0800}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1120}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0960}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1040}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0720}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0880}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0880}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0960}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1040}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0480}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+sd
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p0
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p25
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p50
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p75
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p100
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+hist
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+year & 0 & 1 & 1979.50 & 17.27 & 1952.00 & 1965.75 & 1979.50 & 1993.25 &
+2007.0 & ▇▅▅▅▇ \\
+lifeExp & 0 & 1 & 59.47 & 12.92 & 23.60 & 48.20 & 60.71 & 70.85 & 82.6 &
+▁▆▇▇▇ \\
+pop & 0 & 1 & 29601212.32 & 106157896.74 & 60011.00 & 2793664.00 &
+7023595.50 & 19585221.75 & 1318683096.0 & ▇▁▁▁▁ \\
+gdpPercap & 0 & 1 & 7215.33 & 9857.45 & 241.17 & 1202.06 & 3531.85 &
+9325.46 & 113523.1 & ▇▁▁▁▁ \\
+\end{longtable}
+
+This is another example of how piping works.
+
+We can also directly use R to call for specific statistics. Say that we
+want the mean of a specific variable (say, the mean of Life Expectancy),
+we can call the \texttt{mean()} function. There are a few different ways
+of referring to variables. We will be using piping once again. In this
+case:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{mean}\NormalTok{(lifeExp))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 1
+##   `mean(lifeExp)`
+##             <dbl>
+## 1            59.5
+\end{verbatim}
+
+In this case, we pipe the \texttt{gapminder} dataset forward, and use
+\texttt{dplyr} to summarize the data, according to the mean. Take a look
+at the summarize function in help and look at some of the other options.
+
+\subsection{Plotting}\label{plotting}
+
+We now use the same \texttt{ggplot2} package from earlier. As before,
+the \texttt{aes()} section of the code is very important. In this case,
+we are providing two ``aesthetics'' options: \texttt{x=continent} and
+\texttt{y\ =\ lifeExp}. This code produces two different plots. Based on
+just the code, can you guess which two?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ continent, }\AttributeTok{y =}\NormalTok{ lifeExp, }\AttributeTok{colour =}\NormalTok{ continent)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab-0_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+How could we improve this plot?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ continent, }\AttributeTok{y =}\NormalTok{ lifeExp, }\AttributeTok{colour =}\NormalTok{ continent)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{height =} \DecValTok{0}\NormalTok{), }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab-0_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+Play around with this yourself. Can you make graphs using other
+variables? What other types of graphs are there? Feel free to check some
+out at:
+\url{http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html}
+
+\end{document}
